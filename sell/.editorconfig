@@ -1,0 +1,16 @@
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+#这是一些编辑器的配置
+# 4 编码
+# 5 编译风格 用一个空格做缩进
+# 6 缩进大小是两个
+# 7 换行符风格
+# 8 当创建一个文件会帮你在文件的末尾自动插入一个新行
+# 9 自动移除行行尾多余空格
