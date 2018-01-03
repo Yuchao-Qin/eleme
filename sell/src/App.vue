@@ -1,6 +1,6 @@
 <template>
  <div id="app">
-   <Header></Header>
+   <Header :seller="seller"></Header>
    <div class="tab">
      <router-link to="/goods" class="tab-item" tag="div">商品</router-link>
      <router-link to="/ratings" class="tab-item" tag="div">评价</router-link>
@@ -12,7 +12,22 @@
 
 <script>
  import Header from './components/header/header.vue';
+ const ERR_OK = 0;
  export default{
+   data() {
+     return {
+       seller:{}
+     }
+   },
+   created () {
+     this.$http.get('/api/seller')
+     .then((response) => {
+       response = response.body
+       if(response.errno === ERR_OK){
+         this.seller = response.data
+       }
+     })
+   },
    components: {
      Header
    }
