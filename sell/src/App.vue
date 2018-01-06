@@ -2,16 +2,17 @@
  <div id="app">
    <Header :seller="seller"></Header>
    <div class="tab">
-     <router-link to="/goods" class="tab-item" tag="div">商品</router-link>
+     <router-link to="/goods" class="tab-item" tag="div" >商品</router-link>
      <router-link to="/ratings" class="tab-item" tag="div">评价</router-link>
      <router-link to="/seller" class="tab-item" tag="div">商家</router-link>
    </div>
-   <router-view></router-view>
+   <router-view :seller="seller"></router-view>
  </div>
 </template>
 
 <script>
  import Header from './components/header/header.vue';
+ import BScroll from 'better-scroll';
  const ERR_OK = 0;
  export default{
    data() {

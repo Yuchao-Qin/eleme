@@ -1,0 +1,138 @@
+<template>
+ <div class="shopcart">
+     <div class="content">
+         <div class="content-left">
+             <div class="logo-wrapper">
+                 <div class="logo">
+                     <i class="icon-shopping_cart"></i>
+                 </div>
+                 <div class="number"></div>
+             </div>
+             <div class="price">￥{{ totalPrice }}</div>
+             <div class="desc">另需配送费￥{{deliveryprice}}元</div>
+         </div>
+         <div class="content-right">
+             <div class="pay">
+                 ￥{{ minprice }}元配送
+             </div>
+         </div>
+     </div>
+ </div>
+</template>
+
+<script>
+ export default {
+   props:{
+    selectFoods:{
+        type:Array,
+        default() {
+            return [
+                {
+                    price:10,
+                    count:1
+                }
+            ];
+        }
+    },   
+    deliveryprice:{
+        type:Number,
+        defaule: 0
+    },
+    minprice:{
+        type:Number,
+        defaule: 0
+    },
+   }  ,
+   data() {
+     return {
+
+     }
+
+   },
+   computed: {
+    totalPrice() {
+        let total = 0;
+        this.selectFoods.forEach((food) => {
+            total += food.price * food.count;
+            })
+            return total;
+    },
+    totalCount() {
+        let count = 0;
+        this.selectFoods.forEach((food)=>{
+            count += food.count;
+        });
+        return count
+    }
+   }
+ }
+</script>
+
+<style scoped lang="stylus">
+    .shopcart
+      position fixed
+      left 0
+      bottom 0
+      z-index 50
+      width 100%
+      height 48px
+      background-color #000  
+      .content
+        display flex
+        background-color #141d27
+        .content-left
+           flex 1
+           font-size 0
+           .logo-wrapper
+             display inline-block  
+             position relative
+             top -10px
+             margin 0 12px
+             padding 6px
+             width 56px
+             height 56px
+             box-sizing border-box
+             vertical-align top
+             border-radius 50% 
+             background-color #141d27
+             .logo
+               width 100%
+               height 100%
+               border-radius 50%
+               text-align center
+               background-color #243b3c  
+               .icon-shopping_cart
+                   font-size 24px
+                   color #80858a
+                   line-height 44px
+           .price
+             display inline-block
+             vertical-align top
+             margin-top 12px
+             vertical-align top
+             line-height 24px
+             box-sizing border-box
+             padding-right 12px
+             border-right 1px solid rgba(255,255,255,0.1)
+             font-size 16px
+             font-weight 700
+             color rgba(255,255,255,0.4)
+           .desc    
+             display inline-block
+             vertical-align top
+             line-height 24px
+             margin 12px 0 0 12px
+             color rgba(255,255,255,0.4)
+             font-size 10px
+        .content-right
+            flex 0,0,105px
+            width 105px      
+            .pay
+              height 48px
+              line-height 48px
+              text-align center
+              font-size 12px  
+              color rgba(255,255,255,0.4)
+              font-weight 700
+              background-color #2b333b
+</style>
