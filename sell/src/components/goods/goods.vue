@@ -30,7 +30,7 @@
                                   <span v-show="food.oldPrice" class="old">{{ food.oldPrice }}</span>
                             </div>
                             <div class="cartcontrol-wrapper">
-                                <cartcontrol :food="food"></cartcontrol>
+                                <cartcontrol @add="addFood" :food="food"></cartcontrol>
                             </div>
                         </div>
                     </li>
@@ -38,7 +38,7 @@
             </li>
         </ul>
     </div>
-    <shopcart :selectFoods="selectFoods" :deliveryprice="seller.deliveryPrice" :minprice="seller.minPrice"></shopcart>
+    <shopcart ref="shopcart" :selectFoods="selectFoods" :deliveryprice="seller.deliveryPrice" :minprice="seller.minPrice"></shopcart>
 </div>
 </template>
 
@@ -103,7 +103,7 @@ import cartcontrol from '../cartcontrol/cartcontrol';
       selectMenu(index,event){
             if(!event._constructed){
                 return
-                // 取消浏览器默认派发的event 事件
+                // 阻止非vue事件
             }
             let foodList = this.$refs.foodList
             let el =foodList[index]
@@ -112,6 +112,15 @@ import cartcontrol from '../cartcontrol/cartcontrol';
             this.foodsScroll.scrollToElement(el,300);
             // ========================================
            
+      },
+      addFood(target) {
+          this._drop(target);
+      },
+      _drop(target){
+        //   体验优化异步执行下落动画
+          this.$nextTick(()=>{
+              this.$refs.shopcart.drop(target);
+          }) 
       },
       _initScroll(){
           this.menuScroll = new BScroll(this.$refs.menuWrapper,{

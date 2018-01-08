@@ -3,12 +3,12 @@
     <transition name="move">
      <div class="cart-decrease"
       v-show="food.count>0"
-       @click="decreaseCart($event)">
+       @click.stop.prevent="decreaseCart">
        <span class="icon-remove_circle_outline inner"></span>
      </div>
     </transition> 
      <div class="cart-count " v-show="food.count>0">{{ food.count }}</div>
-     <div class="cart-add icon-add_circle" @click="addCart($event)"></div>
+     <div class="cart-add icon-add_circle" @click.stop.prevent="addCart"></div>
  </div>
 </template>
 
@@ -26,10 +26,13 @@
                return
            }
            if(!this.food.count) {
-               Vue.set(this.food,'count',1) ;
+               //    添加数据
+               Vue.set(this.food,'count',1) ;     
            }else{
                this.food.count++;
            }
+              //    向父级派发事件
+           this.$emit('add',event.target)
        },
        decreaseCart() {
            if(!event._constructed){
