@@ -7,7 +7,7 @@
        <span class="icon-remove_circle_outline inner"></span>
      </div>
     </transition> 
-     <div class="cart-count " v-show="food.count>0">{{ food.count }}</div>
+     <div class="cart-count" v-show="food.count>0">{{ food.count }}</div>
      <div class="cart-add icon-add_circle" @click.stop.prevent="addCart"></div>
  </div>
 </template>
@@ -43,15 +43,6 @@
            }
        }
    },
-   data() {
-     return {
-
-     }
-
-   },
-   components: {
-
-   }
  }
 </script>
 

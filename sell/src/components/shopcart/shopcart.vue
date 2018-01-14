@@ -40,7 +40,7 @@
                         <span>￥{{ food.price*food.count }}</span>
                     </div>
                     <div class="cartcontrol-wrapper">
-                        <cartcontrol :food="food"></cartcontrol>
+                        <cartcontrol @add="addFood" :food="food"></cartcontrol>
                     </div>
                 </li>
               </ul>  
@@ -158,7 +158,6 @@ import BScroll from 'better-scroll';
    },
    methods: {
        drop(el){
-           console.log(el);
            for (let i=0;i<this.balls.length;i++){
                let ball = this.balls[i];
                if (!ball.show){
@@ -169,6 +168,10 @@ import BScroll from 'better-scroll';
                }
            }
        },
+       addFood(target) {
+        this.$emit('add', target);
+        console.log(target)
+      },
        empty() {
         //    清空
            this.selectFoods.forEach((food)=>{
@@ -182,7 +185,6 @@ import BScroll from 'better-scroll';
            window.alert(`支付${this.totalPrice}元`)
        },
        beforeDrop(el) {
-          console.log(el);
           let count = this.balls.length;
           while(count--) {
               let ball = this.balls[count];

@@ -6,8 +6,12 @@ import Seller from '@/components/seller/seller.vue';
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-  mode: 'history',
+  linkActiveClass: 'active',
   routes: [
+    {
+      path: '/',
+      component: Goods
+    },
     {
       path: '/goods',
       component: Goods
